@@ -1,7 +1,7 @@
-app.controller('TemplateController', [TemplateController]);
+app.controller('pokeForceController', [pokeForceController]);
 // Change Me
 
-function TemplateController() {
+function pokeForceController() {
   var vm = this;
-  vm.title = 'Angular Template'
+  vm.title = 'Angular Template';
 }
