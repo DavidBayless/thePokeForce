@@ -23,7 +23,11 @@ router.get('/', function(req, res, next) {
   users().select().fullOuterJoin('party', 'users.savegameidone', 'party.id')
   .then(function(response) {
     console.log(response);
-    party().select().where('party.id', response[0].savegameidone).fullOuterJoin('pokemon', 'party.pokeone', 'pokemon.joinid')
+    var promises = [];
+    for (var i = 0; i < response.length; i++) {
+      promises.push(party().select().where('party.id', response[i].savegameidone).fullOuterJoin('pokemon', 'party.pokeone', 'pokemon.joinid'));
+    }
+    Promise.all(promises)
     .then(function(newResponse) {
       res.json(newResponse);
     });
